@@ -7,8 +7,8 @@ jQuery(function () {
         ratio = window.devicePixelRatio || 1,
 
         // 缩略图大小
-        thumbnailWidth = 100 * ratio,
-        thumbnailHeight = 100 * ratio,
+        thumbnailWidth = 50 * ratio,
+        thumbnailHeight = 50 * ratio,
         uploader;
 
     uploader = WebUploader.create({
@@ -53,11 +53,11 @@ jQuery(function () {
     // 当有文件添加进来的时候
     uploader.on('fileQueued', function (file) {
         var $li = $(
-            '<li id="' + file.id + '" class="file-item thumbnail">' +
+                '<li id="' + file.id + '" class="file-item thumbnail">' +
             '<img>' +
             '<div class="info" style=width:' + thumbnailWidth + 'px>' + file.name + '</div>' +
             '</li>'
-        ),
+            ),
             $img = $li.find('img');
         // $list为容器jQuery实例
         $list.append($li);
@@ -126,6 +126,8 @@ jQuery(function () {
     // 完成上传完了，成功或者失败，先删除进度条。
     uploader.on('uploadComplete', function (file) {
         // alert('上传成功')
+        console.log('bei');
+
         $('#' + file.id).find('.progress').remove();
     });
 
@@ -154,7 +156,7 @@ jQuery(function () {
     $btn.on('click', function () {
         if (state === 'uploading') {
             uploader.stop();
-            $btn.text('已暂停')
+            $btn.text('已暂停');
         } else {
             uploader.upload();
         }
